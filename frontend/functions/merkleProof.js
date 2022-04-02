@@ -23,8 +23,8 @@ exports.handler = async (event, context) => {
 
   const data = await fetch(url + query, options)
   const json = await data.json();
-  const contractInfo = json.contracts ? json.contracts.filter(contract => contract.address.toLowerCase() === contract_address.toLowerCase()) : [];
-  const merkleProofs = contractInfo[0] && contractInfo[0].merkle_proofs || {};
+  const contractInfo = json.contracts.filter(contract => contract.address.toLowerCase() === contract_address.toLowerCase());
+  const merkleProofs = contractInfo[0].merkle_proofs || {};
   const merkleProof = merkleProofs[wallet.toLowerCase()] || [];
 
   return {
